@@ -6,3 +6,5 @@ logs/
 
 # Ignorar a pasta db
 db/
+
+.env
