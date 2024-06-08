@@ -4,11 +4,7 @@ require('dotenv').config()
 
 const app = express()
 
-const corsOptions = {
-    origin: 'http://localhost:3000' // ou a URL do seu frontend
-};
-
-app.use(cors(corsOptions))
+app.use(cors())
 
 // Middleware responsável em fazer a aplicação ler requests Json
 app.use(express.json())
