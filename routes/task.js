@@ -4,6 +4,16 @@ const simpleRouter = require('express').Router()
 const Checklist = require('../models/Checklist')
 const Task = require('../models/Task')
 
+router.get('/:id/tasks', async (req, res) => {
+    try {
+        let checklistId = req.params.id
+        let tasks = await Task.find({ checklist: checklistId }).exec()
+        res.status(200).json(tasks)
+    } catch (error) {
+        res.status(422).json(error)
+    }
+})
+
 router.post('/:id/tasks', async (req, res) => {
     let { name } = req.body.task
     let task = new Task({ name, checklist: req.params.id })
@@ -13,9 +23,9 @@ router.post('/:id/tasks', async (req, res) => {
         let checklist = await Checklist.findById(req.params.id)
         checklist.tasks.push(task)
         await checklist.save()
-        res.status(200).json({ success: true, checklist })
+        res.status(200).json(checklist)
     } catch (error) {
-        res.status(422).json({ success: false, error: error })
+        res.status(422).json(error)
     }
 })
 
