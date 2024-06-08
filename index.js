@@ -4,7 +4,11 @@ require('dotenv').config()
 
 const app = express()
 
-app.use(cors())
+const corsOptions = {
+    origin: 'http://localhost:3000' // ou a URL do seu frontend
+};
+
+app.use(cors(corsOptions))
 
 // Middleware responsável em fazer a aplicação ler requests Json
 app.use(express.json())
@@ -24,5 +28,3 @@ app.use('/api', routes)
 app.listen(process.env.PORT, () => {
     console.log('Servidor Online!')
 })
-
-// PdcPF00W5JATsJW7
